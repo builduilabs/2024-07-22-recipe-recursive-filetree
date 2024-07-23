@@ -29,9 +29,8 @@ export default function Page() {
         </Switch.Root>
       </div>
 
-      <div className="h-full py-8">
+      <div className="h-full pt-14 px-4 pb-4 md:py-8">
         <div className="p-4 rounded-lg mx-auto h-full overflow-scroll shadow-lg shadow-black w-full max-w-sm bg-white">
-          {/* transition={{ type: 'spring', bounce: 0, duration: 0.4 }} */}
           <MotionConfig
             transition={{
               type: 'spring',
