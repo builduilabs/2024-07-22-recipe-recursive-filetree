@@ -2,7 +2,6 @@
 
 import { ChevronRightIcon } from '@heroicons/react/16/solid';
 import { DocumentIcon, FolderIcon } from '@heroicons/react/24/solid';
-import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
 type Node = {
@@ -18,13 +17,9 @@ export function FilesystemItem({ node }: { node: Node }) {
       <span className="flex items-center gap-1.5 py-1">
         {node.nodes && node.nodes.length > 0 && (
           <button onClick={() => setIsOpen(!isOpen)} className="p-1 -m-1">
-            <motion.span
-              animate={{ rotate: isOpen ? 90 : 0 }}
-              transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
-              className="flex"
-            >
-              <ChevronRightIcon className="size-4 text-gray-500" />
-            </motion.span>
+            <ChevronRightIcon
+              className={`size-4 text-gray-500 ${isOpen ? 'rotate-90' : ''}`}
+            />
           </button>
         )}
 
@@ -40,21 +35,13 @@ export function FilesystemItem({ node }: { node: Node }) {
         {node.name}
       </span>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.ul
-            initial={{ height: 0 }}
-            animate={{ height: 'auto' }}
-            exit={{ height: 0 }}
-            transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
-            className="pl-6 overflow-hidden bg-geen-300 flex flex-col justify-end"
-          >
-            {node.nodes?.map((node) => (
-              <FilesystemItem node={node} key={node.name} />
-            ))}
-          </motion.ul>
-        )}
-      </AnimatePresence>
+      {isOpen && (
+        <ul className="pl-6">
+          {node.nodes?.map((node) => (
+            <FilesystemItem node={node} key={node.name} />
+          ))}
+        </ul>
+      )}
     </li>
   );
 }
