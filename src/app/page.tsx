@@ -7,7 +7,7 @@ import * as Switch from '@radix-ui/react-switch';
 import { MotionConfig } from 'framer-motion';
 
 export default function Page() {
-  let [isAnimated, setIsAnimated] = useState(false);
+  let [isAnimated, setIsAnimated] = useState(true);
 
   return (
     <div className="relative h-full">
