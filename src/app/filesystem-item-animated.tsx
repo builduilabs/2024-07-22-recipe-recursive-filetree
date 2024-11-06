@@ -15,26 +15,27 @@ export function FilesystemItemAnimated({ node }: { node: Node }) {
 
   return (
     <li key={node.name}>
-      <span className="flex items-center gap-1.5 py-1">
-        {node.nodes && node.nodes.length > 0 && (
-          <button onClick={() => setIsOpen(!isOpen)} className="p-1 -m-1">
-            <motion.span animate={{ rotate: isOpen ? 90 : 0 }} className="flex">
-              <ChevronRightIcon className="size-4 text-gray-500" />
-            </motion.span>
-          </button>
-        )}
-
-        {node.nodes ? (
-          <FolderIcon
-            className={`size-6 text-sky-500 ${
-              node.nodes.length === 0 ? 'ml-[22px]' : ''
-            }`}
-          />
-        ) : (
-          <DocumentIcon className="ml-[22px] size-6 text-gray-900" />
-        )}
-        {node.name}
-      </span>
+      {node.nodes?.length ? (
+        <button
+          className="flex items-center gap-1.5 py-1"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <motion.span animate={{ rotate: isOpen ? 90 : 0 }} className="flex">
+            <ChevronRightIcon className="size-4 text-gray-500" />
+          </motion.span>
+          <FolderIcon className="size-6 text-sky-500" />
+          {node.name}
+        </button>
+      ) : (
+        <span className="flex items-center gap-1.5 py-1">
+          {node.nodes ? (
+            <FolderIcon className="size-6 text-sky-500 ml-[22px]" />
+          ) : (
+            <DocumentIcon className="ml-[22px] size-6 text-gray-900" />
+          )}
+          {node.name}
+        </span>
+      )}
 
       <AnimatePresence>
         {isOpen && (
